@@ -60,6 +60,7 @@ class UkuranController extends Controller
      */
     public function destroy(Ukuran $ukuran)
     {
-        //
+        $ukuran->delete();
+        return redirect()->route('ukuran.index')->with('success', 'Ukuran berhasil dihapus!');
     }
 }
