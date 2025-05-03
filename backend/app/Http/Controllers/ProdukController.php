@@ -43,7 +43,8 @@ class ProdukController extends Controller
             'gambarProduk' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'namaProduk' => 'required|string|max:25',
             'deskripsiProduk' => 'required|string|max:300',
-            'hargaProduk' =>'required|integer'
+            'hargaProduk' =>'required|integer',
+            'statusProduk'=> 'enum|'
         ]);
     }
 

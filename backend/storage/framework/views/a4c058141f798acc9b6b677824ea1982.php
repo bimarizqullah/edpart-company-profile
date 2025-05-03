@@ -60,9 +60,13 @@
                     <i class="fas fa-box fa-sm fa-fw mr-2 text-gray-400"></i>
                     Catalog
                 </a>
-                <a class="collapse-item" href="forgot-password.html">
+                <a class="collapse-item" href="/produk">
                     <i class="fas fa-folder fa-sm fa-fw mr-2 text-gray-400"></i>
                     Product
+                </a>
+                <a class="collapse-item" href="/ukuran">
+                    <i class="fas fa-chart-bar fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Size
                 </a>
             </div>
         </div>

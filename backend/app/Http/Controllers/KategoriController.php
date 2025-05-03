@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Katalog;
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::all();
+        $totalProduk = Produk::all();
         $totalKatalog = Katalog::count();
         $totalKategori  = Kategori::count();
         $totalUsers = User::count();
