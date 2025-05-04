@@ -15,10 +15,6 @@ class DashboardController extends Controller
         $totalKatalog = Katalog::count();
         $totalKategori = Kategori::count();
         $totalUsers = User::count();
-        $users = User::all();
-        $katalogs = Katalog::all();
-        $kategoris = Kategori::all();
-        $produks = Produk::all();
         return view('layouts.dashboard',
          compact('users',
          'katalogs',
