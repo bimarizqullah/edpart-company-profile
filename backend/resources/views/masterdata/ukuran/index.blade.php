@@ -25,10 +25,16 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="thead-light">
+                        <thead class="thead-light text-center">
                             <tr>
-                                <th class="col-md-10">
+                                <th class="col-md-6">
+                                    Catalog (type)
+                                </th>
+                                <th class="col-md-2">
                                     Size
+                                </th>
+                                <th class="col-md-2">
+                                    Price
                                 </th>
                                 <th class="text-center">
                                     Action
@@ -38,7 +44,9 @@
                         <tbody>
                             @forelse($ukurans as $ukuran)
                                 <tr>
+                                    <td>{{ $ukuran->katalog->namaKatalog }}</td>
                                     <td>{{ $ukuran->ukuran }}</td>
+                                    <td>{{ $ukuran->harga }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('ukuran.edit', $ukuran->id) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
@@ -56,7 +64,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted">Tidak ada data Ukuran.</td>
+                                    <td colspan="10" class="text-center text-muted">Tidak ada data Ukuran.</td>
                                 </tr>
                             @endforelse
                         </tbody>

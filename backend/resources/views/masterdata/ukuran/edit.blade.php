@@ -18,11 +18,33 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
+                        <div class="col-md-6 form-group">
+                            <p>Choose Type</p>
+                            <select name="katalog_id" class="form-control" required>
+                                <option value="">-- Choose Type --</option>
+                                @foreach($katalog as $k)
+                                    <option value="{{ $k->id }}" @selected(old('katalog_id', $ukuran->katalog_id) == $k->id)>
+                                        {{ $k->namaKatalog }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('katalog_id')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-md-12 form-group">
                             <p>Size</p>
                             <input type="text" class="form-control form-control-user" id="ukuran" name="ukuran"
                                 value="{{$ukuran->ukuran}}" required>
                             @error('ukuran')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <p>Price</p>
+                            <input type="number" class="form-control form-control-user" id="harga" name="harga"
+                                value="{{$ukuran->harga}}" required>
+                            @error('harga')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

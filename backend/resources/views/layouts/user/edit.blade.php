@@ -14,7 +14,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">User Informations</h6>
             </div>
             <div class="col-md-12 my-3 px-5">
-                <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form id="update-form-{{$user->id}}" action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -65,28 +65,38 @@
                             @enderror
                         </div>
                     </div>              
-                    <hr>
-                    <button type="submit" class="btn btn-primary btn-user btn-block mb-3">
+                    <hr>    
+                    <button type="button" class="btn btn-primary btn-user btn-block mb-3" onclick="confirmUpdate('update-form-{{$user->id}}')">
                         Save
                     </button>
                 </form>
             </div>
         </div>
     </div>
-@endsection
-
-@push('scripts')
+    @push('scripts')
     <!-- Tambahkan SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    @if(session('success'))
-        <script>
-            Swal.fire({
-                title: 'Success!',
-                text: "{{ session('success') }}",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
+    <script>
+    function confirmUpdate(formId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda akan melakukan perubahan!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+</script>
 @endpush
+@endsection
+

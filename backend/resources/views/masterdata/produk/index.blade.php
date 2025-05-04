@@ -52,7 +52,7 @@
                                 <td>{{ $produk->katalog->namaKatalog }}</td>
                                 <td>{{ $produk->deskripsiProduk }}</td>
                                 <td>{{ $produk->ukuran->ukuran }}</td>
-                                <td>{{ $produk->hargaProduk }}</td>
+                                <td>{{ $produk->ukuran->harga }}</td>
                                 <td>
                                     <span class="badge {{ $produk->statusProduk === 'aktif' ? 'badge-success' : 'badge-secondary' }}">
                                         {{ ucfirst($produk->statusProduk) }}

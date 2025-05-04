@@ -50,7 +50,7 @@
                                 <td><?php echo e($produk->katalog->namaKatalog); ?></td>
                                 <td><?php echo e($produk->deskripsiProduk); ?></td>
                                 <td><?php echo e($produk->ukuran->ukuran); ?></td>
-                                <td><?php echo e($produk->hargaProduk); ?></td>
+                                <td><?php echo e($produk->ukuran->harga); ?></td>
                                 <td>
                                     <span class="badge <?php echo e($produk->statusProduk === 'aktif' ? 'badge-success' : 'badge-secondary'); ?>">
                                         <?php echo e(ucfirst($produk->statusProduk)); ?>

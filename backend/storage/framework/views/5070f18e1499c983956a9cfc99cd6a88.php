@@ -123,9 +123,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startPush('scripts'); ?>
+    <?php $__env->startPush('scripts'); ?>
     <!-- Tambahkan SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -140,4 +138,7 @@ unset($__errorArgs, $__bag); ?>
         </script>
     <?php endif; ?>
 <?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+
 <?php echo $__env->make('partials.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\XAMPP\htdocs\edpArt\backend\resources\views/layouts/user/create.blade.php ENDPATH**/ ?>

@@ -76,4 +76,9 @@ class Katalog extends Model
     {
         return $this->hasMany(Produk::class, 'katalog_id');
     }
+
+    public function ukuran()
+    {
+        return $this->hasMany(Ukuran::class, 'katalog_id');
+    }
 }

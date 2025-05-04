@@ -4,6 +4,12 @@
 
 
 <?php $__env->startSection('content'); ?>
+<?php if($errors->has('username')): ?>
+    <div id="alert" class="alert alert-danger" role="alert">
+        <?php echo e($errors->first('username')); ?>
+
+    </div>
+<?php endif; ?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
     <!-- Outer Row -->
@@ -71,5 +77,17 @@ unset($__errorArgs, $__bag); ?>
 
 </div>
 <?php $__env->stopSection(); ?>
+<?php $__env->startPush('scripts'); ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var alert = document.getElementById('alert');
+        if (alert) {
+            setTimeout(function () {
+                alert.style.display = 'none';
+            }, 3000); // 3000 ms = 3 detik
+        }
+    });
+</script>
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('auth.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\XAMPP\htdocs\edpArt\backend\resources\views/auth/login.blade.php ENDPATH**/ ?>

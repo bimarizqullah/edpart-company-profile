@@ -4,6 +4,11 @@
 
 
 @section('content')
+@if ($errors->has('username'))
+    <div id="alert" class="alert alert-danger" role="alert">
+        {{ $errors->first('username') }}
+    </div>
+@endif
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
     <!-- Outer Row -->
@@ -57,3 +62,15 @@
 
 </div>
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var alert = document.getElementById('alert');
+        if (alert) {
+            setTimeout(function () {
+                alert.style.display = 'none';
+            }, 3000); // 3000 ms = 3 detik
+        }
+    });
+</script>
+@endpush

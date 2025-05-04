@@ -52,7 +52,6 @@ class ProdukController extends Controller
             'gambarProduk' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'namaProduk' => 'required|string|max:25',
             'deskripsiProduk' => 'required|string|max:300',
-            'hargaProduk' =>'required|integer',
             'statusProduk'=> 'required|in:aktif,nonaktif'
         ]);
         Produk::addProduct($request);
@@ -80,7 +79,6 @@ class ProdukController extends Controller
             'katalog_id' => 'required|exists:katalog,id',
             'namaProduk' => 'required|string|max:25',
             'deskripsiProduk' => 'required|string|max:300',
-            'hargaProduk' =>'required|integer',
             'statusProduk'=> 'required|in:aktif,nonaktif'
         ]);
 

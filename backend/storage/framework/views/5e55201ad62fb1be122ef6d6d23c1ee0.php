@@ -52,10 +52,10 @@
                                     <a href="<?php echo e(route('users.edit', $user->id)); ?>" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="<?php echo e(route('users.destroy', $user->id)); ?>" method="POST" style="display:inline-block;">
+                                    <form id="delete-form-<?php echo e($user->id); ?>" action="<?php echo e(route('users.destroy', $user->id)); ?>" method="POST" style="display:inline-block;">
                                         <?php echo csrf_field(); ?>
                                         <?php echo method_field('DELETE'); ?>
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus user ini?')">
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('delete-form-<?php echo e($user->id); ?>')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -72,6 +72,44 @@
         </div>
     </div>
 </div>
+
+<?php $__env->startPush('scripts'); ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function confirmDelete(formId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak dapat dipulihkan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-success'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+
+    <?php if(session('success')): ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: '<?php echo e(session('success')); ?>',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000, // Menampilkan notifikasi selama 3 detik
+            toast: true
+        });
+        <?php endif; ?>
+</script>
+<?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('partials.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\XAMPP\htdocs\edpArt\backend\resources\views/layouts/user/index.blade.php ENDPATH**/ ?>

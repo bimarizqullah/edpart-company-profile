@@ -36,12 +36,14 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="/users">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Users</span>
-        </a>
-    </li>
+    <?php if(Auth::check() && Auth::user()->level === 'superadmin'): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="/users">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Users</span>
+            </a>
+        </li>
+    <?php endif; ?>
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"

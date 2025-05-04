@@ -16,10 +16,7 @@ class DashboardController extends Controller
         $totalKategori = Kategori::count();
         $totalUsers = User::count();
         return view('layouts.dashboard',
-         compact('users',
-         'katalogs',
-         'kategoris',
-         'produks',
+         compact(
          'totalUsers',
           'totalKategori',
            'totalKatalog',

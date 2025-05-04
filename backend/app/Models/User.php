@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\User as Authenticatable;  // Menggunakan Authenticatable
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable  // Pastikan model mewarisi dari Authenticatable

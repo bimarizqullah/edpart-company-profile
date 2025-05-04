@@ -25,7 +25,6 @@ class Produk extends Model
         'katalog_id',
         'namaProduk',
         'deskripsiProduk',
-        'hargaProduk',
         'statusProduk'
     ];
 
@@ -38,7 +37,6 @@ class Produk extends Model
             'katalog_id' => $request->katalog_id ?? null,
             'namaProduk' => $request->namaProduk,
             'deskripsiProduk' => $request->deskripsiProduk,
-            'hargaProduk' => $request->hargaProduk,
             'statusProduk' => $request->statusProduk
         ];
 
@@ -59,7 +57,6 @@ class Produk extends Model
         $produk->namaProduk      = $data['namaProduk'];
         $produk->deskripsiProduk = $data['deskripsiProduk'];
         $produk->katalog_id      = $data['katalog_id'];
-        $produk->hargaProduk = $data['hargaProduk'];
         $produk->statusProduk = $data['statusProduk'];
         $produk->ukuran_id = $data['ukuran_id'];      
         $produk->user_id          = Auth::id();

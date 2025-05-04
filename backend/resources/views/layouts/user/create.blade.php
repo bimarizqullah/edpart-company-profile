@@ -81,9 +81,7 @@
             </div>
         </div>
     </div>
-@endsection
-
-@push('scripts')
+    @push('scripts')
     <!-- Tambahkan SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -98,3 +96,5 @@
         </script>
     @endif
 @endpush
+@endsection
+

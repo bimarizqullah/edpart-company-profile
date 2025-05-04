@@ -20,7 +20,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // Route setelah User melakukan Login
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'check.level'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard']);
     Route::resource('/users', UserController::class);
     Route::resource('/profile', ProfileController::class);

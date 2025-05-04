@@ -19,11 +19,13 @@ class UkuranController extends Controller
         $totalKategori  = Kategori::count();
         $totalUsers = User::count();
         $ukurans = Ukuran::all();
+        $katalog = Katalog::all();
         $totalKatalog = Katalog::count();
         $totalSize = Ukuran::count();
         return view('masterdata.ukuran.index',
          compact(
             'ukurans',
+            'katalog',
              'totalUsers',
               'totalKategori',
                'totalKatalog',
@@ -34,17 +36,21 @@ class UkuranController extends Controller
 
     public function create()
     {
+        $katalog = Katalog::all();
         $ukuran = Ukuran::all();
         return view('masterdata.ukuran.create',
          compact(
-            'ukuran
-            '));
+            'ukuran',
+            'katalog'
+        ));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'ukuran' => 'required|string'
+            'katalog_id' => 'required|exists:katalog,id',
+            'ukuran' => 'required|string',
+            'harga' => 'required|integer'
         ]);
         $validated['users_id'] = Auth::id();
         Ukuran::create($validated);
@@ -55,17 +61,21 @@ class UkuranController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $katalog = Katalog::all();
         $ukuran = Ukuran::findOrFail($id);
         return view('masterdata.ukuran.edit',
          compact(
-            'ukuran'
+            'ukuran',
+            'katalog'
         ));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'ukuran'      => 'required|string|max:255'
+            'katalog_id' => 'required|exists:katalog,id',
+            'ukuran'      => 'required|string|max:255',
+            'harga' => 'required|integer'
         ]);
 
         $data = $request->all();

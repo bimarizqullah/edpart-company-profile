@@ -14,7 +14,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">User Informations</h6>
             </div>
             <div class="col-md-12 my-3 px-5">
-                <form action="<?php echo e(route('users.update', $user->id)); ?>" method="POST" enctype="multipart/form-data">
+                <form id="update-form-<?php echo e($user->id); ?>" action="<?php echo e(route('users.update', $user->id)); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PUT'); ?>
                     <div class="row">
@@ -100,29 +100,40 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>              
-                    <hr>
-                    <button type="submit" class="btn btn-primary btn-user btn-block mb-3">
+                    <hr>    
+                    <button type="button" class="btn btn-primary btn-user btn-block mb-3" onclick="confirmUpdate('update-form-<?php echo e($user->id); ?>')">
                         Save
                     </button>
                 </form>
             </div>
         </div>
     </div>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startPush('scripts'); ?>
+    <?php $__env->startPush('scripts'); ?>
     <!-- Tambahkan SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <?php if(session('success')): ?>
-        <script>
-            Swal.fire({
-                title: 'Success!',
-                text: "<?php echo e(session('success')); ?>",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    <?php endif; ?>
+    <script>
+    function confirmUpdate(formId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda akan melakukan perubahan!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+</script>
 <?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+
 <?php echo $__env->make('partials.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\XAMPP\htdocs\edpArt\backend\resources\views/layouts/user/edit.blade.php ENDPATH**/ ?>
