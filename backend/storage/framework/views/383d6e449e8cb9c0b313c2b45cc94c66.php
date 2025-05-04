@@ -1,7 +1,5 @@
-@extends('partials.app')
-
-@section('content')
-    <a href="{{ route('ukuran.index') }}" class="btn btn-warning btn-icon-split my-3">
+<?php $__env->startSection('content'); ?>
+    <a href="<?php echo e(route('ukuran.index')); ?>" class="btn btn-warning btn-icon-split my-3">
         <span class="icon text-white-50">
             <i class="fas fa-arrow-left"></i>
         </span>
@@ -14,16 +12,23 @@
                 <h6 class="m-0 font-weight-bold text-primary">Size Informations</h6>
             </div>
             <div class="col-md-12 my-3 px-5">
-                <form action="{{ route('ukuran.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="<?php echo e(route('ukuran.store')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <p>Size</p>
                             <input type="text" class="form-control form-control-user" id="ukuran" name="ukuran"
                                 required>
-                            @error('ukuran')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <?php $__errorArgs = ['ukuran'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="text-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                     <hr>
@@ -34,22 +39,22 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <!-- Tambahkan SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <script>
             Swal.fire({
                 title: 'Success!',
-                text: "{{ session('success') }}",
+                text: "<?php echo e(session('success')); ?>",
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
         </script>
-    @endif
+    <?php endif; ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const inputs = document.querySelectorAll('.custom-file-input');
@@ -64,4 +69,5 @@
             });
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('partials.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\XAMPP\htdocs\edpArt\backend\resources\views/masterdata/ukuran/create.blade.php ENDPATH**/ ?>

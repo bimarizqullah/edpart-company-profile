@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UkuranController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -25,5 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'updateFoto'])->name('profile.updateFoto');
     Route::resource('/kategori', KategoriController::class);
     Route::resource('/katalog', KatalogController::class);
+    Route::resource('/ukuran', UkuranController::class);
+    Route::resource('/produk', ProdukController::class);
 });
 

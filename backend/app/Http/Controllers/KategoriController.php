@@ -20,11 +20,17 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::all();
-        $totalProduk = Produk::all();
+        $totalProduk = Produk::count();
         $totalKatalog = Katalog::count();
         $totalKategori  = Kategori::count();
         $totalUsers = User::count();
-        return view('masterdata.kategori.index', compact('kategoris','totalUsers', 'totalKategori', 'totalKatalog'));
+        return view('masterdata.kategori.index',
+         compact('kategoris',
+         'totalUsers',
+          'totalKategori',
+           'totalKatalog',
+           'totalProduk'
+        ));
     }
 
     /**

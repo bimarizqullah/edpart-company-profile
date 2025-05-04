@@ -4,20 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Katalog;
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Http\Request;
-
 
 
 class KatalogController extends Controller
 {
     public function index()
     {
+        $totalProduk = Produk::count();
         $totalKategori  = Kategori::count();
         $totalUsers = User::count();
         $katalogs = Katalog::all();
         $totalKatalog = Katalog::count();
-        return view('masterdata.katalog.index', compact('katalogs', 'totalKategori', 'totalUsers', 'totalKatalog'));
+        return view('masterdata.katalog.index',
+         compact(
+            'katalogs',
+             'totalKategori',
+              'totalUsers',
+               'totalKatalog',
+               'totalProduk'
+            ));
     }
 
     public function create()
@@ -49,7 +57,7 @@ class KatalogController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'namaKatalog'      => 'required|string|max:255',
+            'namaKatalog'      => 'required|string',
             'deskripsiKatalog' => 'required|string',
             'kategori_id'      => 'required|exists:kategori,id',
             'gambarKatalog'    => 'nullable|image|mimes:jpeg,png,jpg|max:10240',

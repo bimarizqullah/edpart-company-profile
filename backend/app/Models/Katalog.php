@@ -72,4 +72,8 @@ class Katalog extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+    public function produk()
+    {
+        return $this->hasMany(Produk::class, 'katalog_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Katalog;
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -12,11 +13,18 @@ class UserController extends Controller
 {
     public function index()
     {
+        $totalProduk = Produk::count();
         $totalKatalog = Katalog::count();
         $totalKategori = Kategori::count();
         $totalUsers = User::count();
         $users =User::all();
-        return view('layouts.user.index', compact('users', 'totalUsers', 'totalKategori', 'totalKatalog'));
+        return view('layouts.user.index',
+         compact('users',
+          'totalUsers',
+           'totalKategori',
+            'totalKatalog',
+            'totalProduk'
+        ));
     }
 
     public function store(Request $request)

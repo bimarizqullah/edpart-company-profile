@@ -2,65 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Katalog;
+use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\Ukuran;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UkuranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('masterdata.ukuran.index');
+        $totalProduk = Produk::count();
+        $totalKategori  = Kategori::count();
+        $totalUsers = User::count();
+        $ukurans = Ukuran::all();
+        $totalKatalog = Katalog::count();
+        $totalSize = Ukuran::count();
+        return view('masterdata.ukuran.index',
+         compact(
+            'ukurans',
+             'totalUsers',
+              'totalKategori',
+               'totalKatalog',
+                'totalSize',
+                'totalProduk'
+            ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('masterdata.ukuran.create');
+        $ukuran = Ukuran::all();
+        return view('masterdata.ukuran.create',
+         compact(
+            'ukuran
+            '));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'ukuran' => 'required|string'
+        ]);
+        $validated['users_id'] = Auth::id();
+        Ukuran::create($validated);
+        return redirect()
+        ->route('ukuran.index')
+        ->with('success', 'Ukuran berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ukuran $ukuran)
+    public function edit(Request $request, $id)
     {
-        //
+        $ukuran = Ukuran::findOrFail($id);
+        return view('masterdata.ukuran.edit',
+         compact(
+            'ukuran'
+        ));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ukuran $ukuran)
+    public function update(Request $request, $id)
     {
-        return view('masterdata.ukuran.edit');
+        $request->validate([
+            'ukuran'      => 'required|string|max:255'
+        ]);
+
+        $data = $request->all();
+
+        Ukuran::updateUkuran($id,  $data);
+        return redirect()
+        ->route('ukuran.index')
+        ->with('success', 'Katalog berhasil diubah!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ukuran $ukuran)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Ukuran $ukuran)
     {
         $ukuran->delete();
-        return redirect()->route('ukuran.index')->with('success', 'Ukuran berhasil dihapus!');
+        return redirect()
+        ->route('ukuran.index')
+        ->with('success', 'Ukuran berhasil dihapus!');
     }
+
+    
 }
