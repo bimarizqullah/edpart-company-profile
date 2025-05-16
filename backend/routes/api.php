@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\KatalogController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\ProdukController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ApiKategoriController;
+use App\Http\Controllers\Api\ApiKatalogController;
+use App\Http\Controllers\Api\ApiProdukController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/kategori', [KategoriController::class, 'getKatalog']);
-Route::get('/katalog', [KatalogController::class, 'getProduk']);
-Route::get('/produk', [ProdukController::class, 'getAll']);
+Route::get('/kategori', [ApiKategoriController::class, 'getKatalog']);
+Route::get('/katalog', [ApiKatalogController::class, 'getProduk']);
+Route::get('/produk', [ApiProdukController::class, 'getAll']);

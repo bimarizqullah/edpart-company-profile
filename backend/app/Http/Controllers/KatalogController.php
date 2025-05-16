@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
 
 class KatalogController extends Controller
 {
-
-    // API
-
-    public function getProduk()
-    {
-        return response()->json([
-            'data' => Katalog::getProduk(), // jika kamu tetap ingin ambil dari model
-        ]);
-    }
-
     public function index()
     {
         $totalProduk = Produk::count();

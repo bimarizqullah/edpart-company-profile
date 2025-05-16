@@ -14,14 +14,6 @@ use Illuminate\Support\Facades\Storage;
 
 class KategoriController extends Controller
 {
-    // API
-    
-    public function getKatalog()
-    {
-       return response()->json([
-            'data' => Kategori::getKatalog(), // jika kamu tetap ingin ambil dari model
-        ]);
-    }
     public function index()
     {
         $kategoris = Kategori::all();

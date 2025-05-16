@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
-
-    public function getAll(){
-       return response()->json([
-            'data' => Produk::getAll(),
-       ]);
-    }
     public function index()
     {
         $totalProduk = Produk::count();
