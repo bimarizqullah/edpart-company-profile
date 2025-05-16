@@ -64,10 +64,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
-                        
-
                         <div class="col-md-6 form-group">
                             <p>Pilih Kategori</p>
+                            
                             <select name="kategori_id" class="form-control" required>
                                 <option value="">-- Pilih Kategori --</option>
                                 <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

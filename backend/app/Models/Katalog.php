@@ -63,6 +63,25 @@ class Katalog extends Model
         return $katalog->save();
     }
 
+    public static function validateData(Request $request, $isUpdate = false){
+        $rules = [
+            'namaKatalog'      => 'required|string',
+            'deskripsiKatalog' => 'required|string',
+            'kategori_id'      => 'required|exists:kategori,id'
+        ];
+
+        if (!$isUpdate) {
+            $rules['gambarKatalog'] = 'nullable|image|mimes:jpeg,png,jpg|max:10240';
+        } else {
+            $rules['gambarKatalog'] = 'required|image|mimes:jpeg,png,jpg|max:10240';
+        }
+        return $request->validate($rules);
+    }
+
+    public static function getProduk(){
+        return self::all();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -75,10 +94,5 @@ class Katalog extends Model
     public function produk()
     {
         return $this->hasMany(Produk::class, 'katalog_id');
-    }
-
-    public function ukuran()
-    {
-        return $this->hasMany(Ukuran::class, 'katalog_id');
     }
 }

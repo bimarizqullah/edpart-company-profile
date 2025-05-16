@@ -21,26 +21,31 @@ class Produk extends Model
     protected $fillable = [
         'gambarProduk',
         'user_id',
-        'ukuran_id',
         'katalog_id',
+        'ukuran',
+        'harga',
         'namaProduk',
         'deskripsiProduk',
         'statusProduk'
     ];
 
+    public static function getByKatalog($katalog_id)
+    {
+        return self::where('katalog_id', $katalog_id)->get();
+    }
+
     public static function addProduct(Request $request)
     {
-        // Validasi sudah dilakukan di controller
         $data = [
             'user_id' => Auth::id(),
-            'ukuran_id' => $request->ukuran_id ?? null,
             'katalog_id' => $request->katalog_id ?? null,
             'namaProduk' => $request->namaProduk,
             'deskripsiProduk' => $request->deskripsiProduk,
+            'ukuran' => $request->ukuran,
+            'harga' => $request->harga,
             'statusProduk' => $request->statusProduk
         ];
 
-        // Jika ada file, simpan ke disk 'public' pada folder 'katalog'
         if ($request->hasFile('gambarProduk') && $request->file('gambarProduk')->isValid()) {
             $data['gambarProduk'] = $request
                 ->file('gambarProduk')
@@ -50,36 +55,60 @@ class Produk extends Model
         return self::create($data);
     }
 
-    public static function updateProduct($id, $data)
+    public static function updateProduct(Request $request, $id)
     {
         $produk = self::findOrFail($id);
 
-        $produk->namaProduk      = $data['namaProduk'];
-        $produk->deskripsiProduk = $data['deskripsiProduk'];
-        $produk->katalog_id      = $data['katalog_id'];
-        $produk->statusProduk = $data['statusProduk'];
-        $produk->ukuran_id = $data['ukuran_id'];      
+        $produk->namaProduk      = $request->namaProduk;
+        $produk->deskripsiProduk = $request->deskripsiProduk;
+        $produk->ukuran = $request->ukuran;
+        $produk->harga = $request->harga;
+        $produk->katalog_id      = $request->katalog_id;
+        $produk->statusProduk = $request->statusProduk;
+
         $produk->user_id          = Auth::id();
 
-        if (isset($data['gambarProduk']) && is_string($data['gambarProduk'])) {
+        if ($request->hasFile('gambarProduk') && $request->file('gambarProduk')->isValid()) {
             if ($produk->gambarProduk && Storage::disk('public')->exists($produk->gambarProduk)) {
                 Storage::disk('public')->delete($produk->gambarProduk);
             }
-            $produk->gambarProduk = $data['gambarProduk'];
+            $produk->gambarProduk = $request->file('gambarProduk')->store('Produk', 'public');
         }
+
 
         return $produk->save();
     }
 
-    public function ukuran() {
-        return $this->belongsTo(Ukuran::class, 'ukuran_id');
+    public static function validateData(Request $request, $isUpdate = false)
+    {
+        $rules = [
+            'namaProduk'      => 'required|string',
+            'deskripsiProduk' => 'required|string',
+            'katalog_id'      => 'required|exists:katalog,id',
+            'ukuran'           => 'required|string',
+            'harga'            => 'required|integer',
+            'statusProduk'     => 'required|in:aktif,nonaktif'
+        ];
+
+        if (!$isUpdate) {
+            $rules['gambarProduk'] = 'required|image|mimes:jpeg,png,jpg|max:10240';
+        } else {
+            $rules['gambarProduk'] = 'nullable|image|mimes:jpeg,png,jpg|max:10240';
+        }
+        return $request->validate($rules);
     }
 
-    public function user() {
+    public static function getAll(){
+        return self::all();
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function katalog() {
+    public function katalog()
+    {
         return $this->belongsTo(Katalog::class, 'katalog_id');
     }
 }

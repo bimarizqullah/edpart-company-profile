@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class KatalogController extends Controller
 {
+
+    // API
+
+    public function getProduk()
+    {
+        return response()->json([
+            'data' => Katalog::getProduk(), // jika kamu tetap ingin ambil dari model
+        ]);
+    }
+
     public function index()
     {
         $totalProduk = Produk::count();
@@ -18,14 +28,16 @@ class KatalogController extends Controller
         $totalUsers = User::count();
         $katalogs = Katalog::all();
         $totalKatalog = Katalog::count();
-        return view('masterdata.katalog.index',
-         compact(
-            'katalogs',
-             'totalKategori',
-              'totalUsers',
-               'totalKatalog',
-               'totalProduk'
-            ));
+        return view(
+            'masterdata.katalog.index',
+            compact(
+                'katalogs',
+                'totalKategori',
+                'totalUsers',
+                'totalKatalog',
+                'totalProduk'
+            )
+        );
     }
 
     public function create()

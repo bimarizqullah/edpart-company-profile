@@ -52,30 +52,26 @@
                         </div>
                         <div class=" col-md-12 form-group">
                             <p>Descripstions</p>
-                            <input type="textarea" class="form-control form-control-user" id="deskripsiProduk"
+                            <textarea class="form-control form-control-user" id="deskripsiProduk"
                                 name="deskripsiProduk" required>
+                            </textarea>
                             @error('deskripsiProduk')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class=" col-md-12 form-group">
                             <p>Price</p>
-                            <input type="textarea" class="form-control form-control-user" id="hargaProduk"
-                                name="hargaProduk" required>
-                            @error('hargaProduk')
+                            <input type="number" class="form-control form-control-user" id="harga"
+                                name="harga" required>
+                            @error('harga')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-8 form-group">
-                            <p>Choose Size</p>
-
-                            <select name="ukuran_id" class="form-control" required>
-                                <option value="">-- Choose Size --</option>
-                                @foreach($ukuran as $u)
-                                    <option value="{{ $u->id }}">{{ $u->ukuran }}</option>
-                                @endforeach
-                            </select>
-                            @error('ukuran_id')
+                        <div class=" col-md-12 form-group">
+                            <p>Size</p>
+                            <input type="text" class="form-control form-control-user" id="ukuran"
+                                name="ukuran" required>
+                            @error('ukuran')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

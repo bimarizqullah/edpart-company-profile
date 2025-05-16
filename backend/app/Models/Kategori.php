@@ -19,6 +19,10 @@ class Kategori extends Model
         'deskripsiKategori'
     ];
 
+    public static function getKatalog(){
+        return self::all();
+    }
+
     public function katalog() {
         return $this->hasMany(Katalog::class, 'katalog_id');
     }

@@ -71,8 +71,9 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class=" col-md-12 form-group">
                             <p>Descripstions</p>
-                            <input type="textarea" class="form-control form-control-user" id="deskripsiProduk"
+                            <textarea class="form-control form-control-user" id="deskripsiProduk"
                                 name="deskripsiProduk" required>
+                            </textarea>
                             <?php $__errorArgs = ['deskripsiProduk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -86,9 +87,9 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class=" col-md-12 form-group">
                             <p>Price</p>
-                            <input type="textarea" class="form-control form-control-user" id="hargaProduk"
-                                name="hargaProduk" required>
-                            <?php $__errorArgs = ['hargaProduk'];
+                            <input type="number" class="form-control form-control-user" id="harga"
+                                name="harga" required>
+                            <?php $__errorArgs = ['harga'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -99,16 +100,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
-                        <div class="col-md-8 form-group">
-                            <p>Choose Size</p>
-
-                            <select name="ukuran_id" class="form-control" required>
-                                <option value="">-- Choose Size --</option>
-                                <?php $__currentLoopData = $ukuran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($u->id); ?>"><?php echo e($u->ukuran); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <?php $__errorArgs = ['ukuran_id'];
+                        <div class=" col-md-12 form-group">
+                            <p>Size</p>
+                            <input type="text" class="form-control form-control-user" id="ukuran"
+                                name="ukuran" required>
+                            <?php $__errorArgs = ['ukuran'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

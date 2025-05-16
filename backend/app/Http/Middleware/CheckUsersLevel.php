@@ -18,8 +18,8 @@ class CheckUsersLevel
             abort(403, 'Unauthorized');
         }
 
-        if ($user->level =='superadmin') {
-            return $next($request);
+        if ($user->level =='superadmin') { 
+            return $next($request);    
         }
 
         if ($user->level == 'admin' && ($request->is('users') || $request->is('users/*'))) {

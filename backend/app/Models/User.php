@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\User as Authenticatable;  // Menggunakan Authenticatable
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable  // Pastikan model mewarisi dari Authenticatable
 {
     use HasFactory;
-
+    use HasApiTokens;
+ 
     protected $table = 'users';  // Menyesuaikan dengan nama tabel 'user'
 
     public $timestamps = false;
